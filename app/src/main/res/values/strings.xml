@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Pagination</string>
+    <string name="txt_repo_name"><b>Repo\'s name:</b> %s</string>
+    <string name="txt_repo_description"><b>Repo\'s description:</b> %s</string>
+    <string name="txt_error">Something went wrong, try it again!</string>
+</resources>
