@@ -1,6 +1,7 @@
 package com.example.pagination.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
@@ -16,6 +17,7 @@ class RepositoryViewModel(
     ViewModel() {
 
     val repositoryList: LiveData<PagedList<Repository>>
+    val showLoading = repositoryDataSourceFactory.repositoryDataSource.showLoading
 
     init {
 

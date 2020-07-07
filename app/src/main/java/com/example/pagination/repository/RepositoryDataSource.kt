@@ -3,6 +3,7 @@ package com.example.pagination.repository
 import androidx.paging.PageKeyedDataSource
 import com.example.pagination.data.KotlinRepositories
 import com.example.pagination.data.Repository
+import com.example.pagination.helper.SingleLiveData
 import com.example.pagination.network.GitHubApiService
 import com.example.pagination.util.FIRST_PAGE
 import com.example.pagination.util.NEXT
@@ -20,10 +21,13 @@ import retrofit2.Response
 class RepositoryDataSource(private val gitHubApiService: GitHubApiService) :
     PageKeyedDataSource<Int, Repository>() {
 
+    val loading = SingleLiveData<Boolean>()
+
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, Repository>
     ) {
+        loading.postValue(true)
         CoroutineScope(Dispatchers.IO).launch {
             val result = gitHubApiService.getRepositoryList(FIRST_PAGE, PAGE_SIZE)
             withContext(Dispatchers.Main) {
@@ -31,12 +35,15 @@ class RepositoryDataSource(private val gitHubApiService: GitHubApiService) :
                     result.enqueue(object : Callback<KotlinRepositories> {
                         override fun onFailure(call: Call<KotlinRepositories>, t: Throwable) {
                             Logger.e(KOIN_TAG, "loadInitial onFailure error message: ${t.message}")
+                            loading.postValue(false)
                         }
 
                         override fun onResponse(
                             call: Call<KotlinRepositories>,
                             response: Response<KotlinRepositories>
                         ) {
+
+                            loading.postValue(false)
                             if (!response.isSuccessful) {
                                 Logger.d(
                                     KOIN_TAG,
@@ -132,4 +139,7 @@ class RepositoryDataSource(private val gitHubApiService: GitHubApiService) :
 
         }
     }
+
+    val showLoading: SingleLiveData<Boolean>
+        get() = loading
 }

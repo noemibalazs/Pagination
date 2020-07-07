@@ -5,7 +5,7 @@ import androidx.paging.DataSource
 import com.example.pagination.data.Repository
 
 class RepositoryDataSourceFactory(
-    private val repositoryDataSource: RepositoryDataSource
+    val repositoryDataSource: RepositoryDataSource
 ) : DataSource.Factory<Int, Repository>() {
 
     private val repositoryDataSourceLiveData = MutableLiveData<RepositoryDataSource>()
