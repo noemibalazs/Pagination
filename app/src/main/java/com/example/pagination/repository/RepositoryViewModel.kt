@@ -13,11 +13,9 @@ import com.example.pagination.util.REPOSITORY_LIST_SAVED_STATE
 class RepositoryViewModel(
     val handle: SavedStateHandle,
     val repositoryDataSourceFactory: RepositoryDataSourceFactory
-) :
-    ViewModel() {
+) : ViewModel() {
 
     val repositoryList: LiveData<PagedList<Repository>>
-    val showLoading = repositoryDataSourceFactory.repositoryDataSource.showLoading
 
     init {
 

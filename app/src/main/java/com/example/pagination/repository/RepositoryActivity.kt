@@ -2,10 +2,10 @@ package com.example.pagination.repository
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.paging.PagedList
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pagination.R
 import com.example.pagination.data.Repository
 import com.example.pagination.databinding.ActivityRepositoryBinding
@@ -51,9 +51,9 @@ class RepositoryActivity : AppCompatActivity() {
         val savedState = viewModel.handle.contains(REPOSITORY_LIST_SAVED_STATE)
 
         if (!savedState) {
-            viewModel.repositoryList.observe(this, Observer {
-                repositoryAdapter.submitList(it)
-                val mutableRepositoryList = it.parseToList()
+            viewModel.repositoryList.observe(this, Observer { pagedList ->
+                repositoryAdapter.submitList(pagedList)
+                val mutableRepositoryList = pagedList.parseToList()
                 viewModel.saveRepositoryListDueConfChanges(mutableRepositoryList)
             })
         } else {
@@ -63,9 +63,6 @@ class RepositoryActivity : AppCompatActivity() {
                 repositoryAdapter.submitList(pagedList)
             })
         }
-        viewModel.showLoading.observe(this, Observer {
-            binding.pbRepository.visibility = if (it) View.VISIBLE else View.INVISIBLE
-        })
     }
 
     private fun getRepositoryPagedList(mutableList: MutableList<Repository>): PagedList<Repository> {
