@@ -2,7 +2,7 @@
 
 TO DO:
 
-Design and implent an application using the GitHub API and saving the viewModel state:
+Design and implement an application using the GitHub API and saving the viewModel state:
 
 1. Display a list of top kotlin repositories;
 2. Fetching data using Retrofit.
