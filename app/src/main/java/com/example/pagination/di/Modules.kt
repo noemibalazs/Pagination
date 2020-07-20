@@ -3,6 +3,9 @@ package com.example.pagination.di
 import androidx.lifecycle.SavedStateHandle
 import androidx.paging.PageKeyedDataSource
 import com.example.pagination.data.Repository
+import com.example.pagination.details.RepositoryDetailsRemoteDataSource
+import com.example.pagination.details.RepositoryDetailsRemoteDataSourceImpl
+import com.example.pagination.details.RepositoryDetailsViewModel
 import com.example.pagination.helper.DataManager
 import com.example.pagination.network.GitHubApiService
 import com.example.pagination.repository.RepositoryDataSource
@@ -32,4 +35,21 @@ val repositoryViewModelModule = module {
 
 val dataManagerModule = module {
     single { DataManager(context = androidApplication().applicationContext) }
+}
+
+val repositoryDetailsViewModel = module {
+
+    single<RepositoryDetailsRemoteDataSource> {
+        RepositoryDetailsRemoteDataSourceImpl(
+            gitHubApiService = get(),
+            dataManager = get(),
+            application = androidApplication()
+        )
+    }
+    viewModel { (handle: SavedStateHandle) ->
+        RepositoryDetailsViewModel(
+            handle = handle,
+            repositoryDetailsRemoteDataSource = get()
+        )
+    }
 }

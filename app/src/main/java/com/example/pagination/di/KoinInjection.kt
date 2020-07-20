@@ -11,11 +11,13 @@ class KoinInjection {
             fun getNetworkModule() = listOf(networkModule)
             fun getRepositoryViewModelModule() = listOf(repositoryViewModelModule)
             fun getDataManagerModule() = listOf(dataManagerModule)
+            fun getRepositoryDetailsViewModelModule() = listOf(repositoryDetailsViewModel)
 
             return mutableListOf<Module>().apply {
                 addAll(getNetworkModule())
                 addAll(getRepositoryViewModelModule())
                 addAll(getDataManagerModule())
+                addAll(getRepositoryDetailsViewModelModule())
             }
         }
     }

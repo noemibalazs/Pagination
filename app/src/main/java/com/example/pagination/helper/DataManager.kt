@@ -14,7 +14,7 @@ class DataManager(context: Context) {
         sharedPreferences.edit().putInt(REPOSITORY_ID, id).apply()
     }
 
-    fun getRepositoryID(): Int {
+    fun getRepositoryId(): Int {
         return sharedPreferences.getInt(REPOSITORY_ID, 0)
     }
 

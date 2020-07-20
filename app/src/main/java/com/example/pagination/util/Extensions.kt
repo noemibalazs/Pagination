@@ -7,9 +7,7 @@ import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
 import android.widget.TextView
 import androidx.paging.PagedList
-import androidx.paging.PagedListAdapter
 import com.example.pagination.data.Repository
-
 
 fun TextView.setSpannableText(text: String) {
     val spannableString = SpannableString(text)
