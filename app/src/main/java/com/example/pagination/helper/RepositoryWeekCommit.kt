@@ -1,16 +1,18 @@
 package com.example.pagination.helper
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.example.pagination.R
+import kotlinx.android.synthetic.main.repository_week_commit.view.*
 
 class RepositoryWeekCommit : ConstraintLayout {
 
-    var color = 0
-    var defaultColor = 0
+    var colorOrNot = false
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -32,14 +34,28 @@ class RepositoryWeekCommit : ConstraintLayout {
         LayoutInflater.from(context).inflate(R.layout.repository_week_commit, this, true)
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.RepositoryWeekCommit)
-        color = typedArray.getColor(
-            R.styleable.RepositoryWeekCommit_textColor,
-            ContextCompat.getColor(context, R.color.colorPrimary)
-        )
-        defaultColor = typedArray.getColor(
-            R.styleable.RepositoryWeekCommit_defaultTextColor,
-            ContextCompat.getColor(context, R.color.colorPrimaryDark)
-        )
+
+        colorOrNot = typedArray.getBoolean(R.styleable.RepositoryWeekCommit_colorOrNot, false)
         typedArray.recycle()
+
+        colorOrNot()
+    }
+
+    private fun colorOrNot() {
+        val color = ContextCompat.getColor(context, R.color.colorPrimary)
+        if (colorOrNot) {
+            this.tv_week.setTextColor(color)
+            this.tv_sunday.setTextColor(color)
+            this.tv_monday.setTextColor(color)
+            this.tv_tuesday.setTextColor(color)
+            this.tv_wednesday.setTextColor(color)
+            this.tv_thursday.setTextColor(color)
+            this.tv_friday.setTextColor(color)
+            this.tv_saturday.setTextColor(color)
+        }
+    }
+
+    fun showOrHide(show: Boolean) {
+        this.isVisible = show
     }
 }

@@ -146,20 +146,20 @@
 
                     <com.example.pagination.helper.RepositoryWeekCommit
                         android:id="@+id/rwc_first_week"
-                        setColor="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        app:colorOrNot="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tv_repos_stats" />
 
                     <com.example.pagination.helper.RepositoryWeekCommit
                         android:id="@+id/rwc_last_week"
-                        setColor="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        app:colorOrNot="true"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/rwc_first_week" />
