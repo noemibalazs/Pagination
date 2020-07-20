@@ -8,11 +8,14 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pagination.R
 import com.example.pagination.data.Repository
+import com.example.pagination.data.RepositoryDetails
 import com.example.pagination.databinding.ActivityRepositoryBinding
+import com.example.pagination.details.RepositoryDetailsActivity
 import com.example.pagination.helper.DataManager
 import com.example.pagination.helper.ListDataSource
 import com.example.pagination.helper.ListProvider
 import com.example.pagination.util.REPOSITORY_LIST_SAVED_STATE
+import com.example.pagination.util.openActivity
 import com.example.pagination.util.parseToList
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.stateViewModel
@@ -28,6 +31,7 @@ class RepositoryActivity : AppCompatActivity() {
         override fun onRepositoryClicked(id: Int, fullName: String) {
             dataManager.saveRepositoryID(id)
             dataManager.saveRepositoryFullName(fullName)
+            openActivity(RepositoryDetailsActivity::class.java)
         }
     }
 

@@ -13,11 +13,11 @@ class RepositoryWeekCommit : ConstraintLayout {
     var defaultColor = 0
 
     constructor(context: Context) : super(context) {
-        init(context, null)
+        init(null)
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context, attrs)
+        init(attrs)
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
@@ -25,21 +25,21 @@ class RepositoryWeekCommit : ConstraintLayout {
         attrs,
         defStyleAttr
     ) {
-        init(context, attrs)
+        init(attrs)
     }
 
-    private fun init(context: Context, attrs: AttributeSet?) {
+    private fun init(attrs: AttributeSet?) {
         LayoutInflater.from(context).inflate(R.layout.repository_week_commit, this, true)
-        val styleAttributes =
+        val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.RepositoryWeekCommit)
-        color = styleAttributes.getColor(
+        color = typedArray.getColor(
             R.styleable.RepositoryWeekCommit_textColor,
             ContextCompat.getColor(context, R.color.colorPrimary)
         )
-        defaultColor = styleAttributes.getColor(
+        defaultColor = typedArray.getColor(
             R.styleable.RepositoryWeekCommit_defaultTextColor,
             ContextCompat.getColor(context, R.color.colorPrimaryDark)
         )
-        styleAttributes.recycle()
+        typedArray.recycle()
     }
 }

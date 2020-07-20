@@ -1,14 +1,12 @@
 package com.example.pagination.helper
 
-import android.annotation.SuppressLint
-import com.example.pagination.R
 import kotlinx.android.synthetic.main.repository_week_commit.view.*
 
 class BindingAdapter {
 
     companion object {
-        @androidx.databinding.BindingAdapter("setTextColor")
-        fun setTextColor(view: RepositoryWeekCommit, set: Boolean) {
+        @androidx.databinding.BindingAdapter("setColor")
+        fun setColor(view: RepositoryWeekCommit, set: Boolean) {
             if (set) {
                 view.apply {
                     tv_week.setTextColor(view.color)

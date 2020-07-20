@@ -1,5 +1,7 @@
 package com.example.pagination.util
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
 import android.text.Spannable
 import android.text.SpannableString
@@ -31,4 +33,8 @@ fun PagedList<Repository>.parseToList(): MutableList<Repository> {
     val mutableList = mutableListOf<Repository>()
     this.map { repository -> mutableList.add(repository) }
     return mutableList
+}
+
+fun Context.openActivity(dest: Class<*>) {
+    startActivity(Intent(this, dest))
 }
