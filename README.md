@@ -5,9 +5,9 @@ TO DO:
 Design and implement an application using the GitHub API and saving the viewModel state:
 
 1. Display a list of top kotlin repositories;
-2. Fetching data using Retrofit.
-3. Create a custom view
-4. Add unit / instrumentation tests
+2. Fetching data using Retrofit;
+3. Create a custom view;
+4. Add unit / instrumentation tests.
 
 Libraries:
 
