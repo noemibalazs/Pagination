@@ -1,15 +1,17 @@
 package com.example.pagination.data
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
+@JsonClass(generateAdapter = true)
 data class Repository(
-    @field:SerializedName("id") val id: Int = 0,
-    @field:SerializedName("name") val name: String? = null,
-    @field:SerializedName("full_name") val full_name: String? = null,
-    @field:SerializedName("description") val description: String? = null
+    @field:Json(name = "id") val id: Int = 0,
+    @field:Json(name = "name") val name: String? = null,
+    @field:Json(name = "full_name") val full_name: String? = null,
+    @field:Json(name = "description") val description: String? = null
 ) : Parcelable {
 
     override fun toString(): String {
