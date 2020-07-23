@@ -13,10 +13,7 @@ import com.example.pagination.network.GitHubApiService
 import com.example.pagination.util.QUERY_ISSUE
 import com.example.pagination.util.QUERY_TYPE
 import com.orhanobut.logger.Logger
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.koin.core.logger.KOIN_TAG
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,7 +25,7 @@ class RepositoryDetailsRemoteDataSourceImpl(
     private val application: Application
 ) : RepositoryDetailsRemoteDataSource {
 
-    private val failureError = SingleLiveData<Any>()
+    private val failureError = SingleLiveData<Boolean>()
 
     override fun getRemoteRepositoryDetails(): LiveData<RepositoryDetails> {
         val repositoryDetails = MutableLiveData<RepositoryDetails>()
@@ -56,6 +53,9 @@ class RepositoryDetailsRemoteDataSourceImpl(
                             }
                         }
                     })
+                    if (!isActive) {
+                        return@withContext
+                    }
                 } catch (e: Exception) {
                     Logger.e(KOIN_TAG, "Something went wrong, see message: ${e.message}")
                 }
@@ -92,6 +92,9 @@ class RepositoryDetailsRemoteDataSourceImpl(
                             }
                         }
                     })
+                    if (!isActive) {
+                        return@withContext
+                    }
 
                 } catch (e: Exception) {
                     Logger.e(KOIN_TAG, "Something went wrong!")
@@ -133,6 +136,10 @@ class RepositoryDetailsRemoteDataSourceImpl(
                         }
                     })
 
+                    if (!isActive) {
+                        return@withContext
+                    }
+
                 } catch (e: Exception) {
                     Logger.e(KOIN_TAG, "Something went wrong!")
                 }
@@ -141,6 +148,6 @@ class RepositoryDetailsRemoteDataSourceImpl(
         return lastYearStatsList
     }
 
-    override val mutableFailureError: SingleLiveData<Any>
+    override val mutableFailureError: SingleLiveData<Boolean>
         get() = failureError
 }

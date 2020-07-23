@@ -3,16 +3,12 @@ package com.example.pagination.repository
 import androidx.paging.PageKeyedDataSource
 import com.example.pagination.data.KotlinRepositories
 import com.example.pagination.data.Repository
-import com.example.pagination.helper.SingleLiveData
 import com.example.pagination.network.GitHubApiService
 import com.example.pagination.util.FIRST_PAGE
 import com.example.pagination.util.NEXT
 import com.example.pagination.util.PAGE_SIZE
 import com.orhanobut.logger.Logger
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.koin.core.logger.KOIN_TAG
 import retrofit2.Call
 import retrofit2.Callback
@@ -51,6 +47,11 @@ class RepositoryDataSource(private val gitHubApiService: GitHubApiService) :
                             }
                         }
                     })
+
+                    if (!isActive) {
+                        return@withContext
+                    }
+
                 } catch (e: Exception) {
                     Logger.e(KOIN_TAG, "loadInitial - Something went really wrong!")
                 }
@@ -92,6 +93,10 @@ class RepositoryDataSource(private val gitHubApiService: GitHubApiService) :
                         }
                     })
 
+                    if (!isActive) {
+                        return@withContext
+                    }
+
                 } catch (e: java.lang.Exception) {
                     Logger.e(KOIN_TAG, "loadAfter - Something went really wrong!")
                 }
@@ -127,11 +132,13 @@ class RepositoryDataSource(private val gitHubApiService: GitHubApiService) :
                         }
 
                     })
+                    if (!isActive) {
+                        return@withContext
+                    }
                 } catch (e: Exception) {
                     Logger.e(KOIN_TAG, "loadBefore - Something went really wrong!")
                 }
             }
-
         }
     }
 }

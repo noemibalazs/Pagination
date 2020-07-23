@@ -14,5 +14,5 @@ interface RepositoryDetailsRemoteDataSource {
 
     fun getRemoteRepositoryLastYearStats(): LiveData<MutableList<LastYearStats>>
 
-    val mutableFailureError: SingleLiveData<Any>
+    val mutableFailureError: SingleLiveData<Boolean>
 }
